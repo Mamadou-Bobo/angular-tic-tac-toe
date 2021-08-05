@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="result">
+        <div class="playerOne" [ngStyle]="{'background-color': playerOne ? '#c0392b' : '#95a5a6'}">
+            <h1>X</h1>
+            <h1>{{playerOneScore > 0 ? playerOneScore : '-'}}</h1>
+        </div>
+        <div class="playerTwo" [ngStyle]="{'background-color': playerTwo ? '#c0392b' : '#95a5a6'}">
+            <h1>O</h1>
+            <h1>{{playerTwoScore > 0 ? playerTwoScore : '-'}}</h1>
+        </div>
+    </div>
+    <div class="currentPlayer" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'flex'}">{{currentPlayer}} {{notWin || isWinner ? '' : 'turn'}}</div>
+    <div class="winner" [ngStyle]="{'display': isWinner || notWin ? 'flex' : 'none'}">
+        <h1 [ngStyle]="{'display': notWin ? 'none' : 'block'}">{{currentPlayer}}</h1>
+        <h1>{{notWin ? 'Game Over!' : 'Winner!'}}</h1>
+    </div>
+    <div class="content" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'flex'}">
+        <app-tic-tac-toe-grid *ngFor="let array of counter(9); index as i"
+                              (click)="handleClick(i)"
+                              [symbol]="elements[i]">
+        </app-tic-tac-toe-grid>
+    </div>
+    <div class="bottom">
+        <div class="mode">
+            <form [formGroup]="modeForm">
+                <select formControlName="value">
+                    <option *ngFor="let mode of modes" [ngValue]="mode.id">{{mode.name}}</option>
+                </select>
+            </form>
+        </div>
+        <div class="btn-restart">
+            <button [disabled]="win" (click)="restartGame()">Restart</button>
+        </div>
+    </div>
+</div>
