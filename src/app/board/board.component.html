@@ -9,17 +9,12 @@
             <h1>{{playerTwoScore > 0 ? playerTwoScore : '-'}}</h1>
         </div>
     </div>
-    <div class="currentPlayer" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'flex'}">{{currentPlayer}} {{notWin || isWinner ? '' : 'turn'}}</div>
+    <div class="currentPlayer" [ngStyle]="{'display': isWinner || notWin || !hideCurrentPlayer ? 'none' : 'flex'}"><span>{{currentPlayer}} {{notWin || isWinner ? '' : 'turn'}}</span></div>
     <div class="winner" [ngStyle]="{'display': isWinner || notWin ? 'flex' : 'none'}">
-        <h1 [ngStyle]="{'display': notWin ? 'none' : 'block'}">{{currentPlayer}}</h1>
+        <h1 [ngStyle]="{'display': notWin ? 'none' : 'block'}">{{player}}</h1>
         <h1>{{notWin ? 'Game Over!' : 'Winner!'}}</h1>
     </div>
-    <div class="content" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'flex'}">
-        <app-tic-tac-toe-grid *ngFor="let array of counter(9); index as i"
-                              (click)="handleClick(i)"
-                              [symbol]="elements[i]">
-        </app-tic-tac-toe-grid>
-    </div>
+        <app-tic-tac-toe-grid [modeValue]="mode"></app-tic-tac-toe-grid>
     <div class="bottom">
         <div class="mode">
             <form [formGroup]="modeForm">

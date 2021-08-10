@@ -1,1 +1,6 @@
-<div class="item" (click)="showItem()"><h1>{{symbol}}</h1></div>
+<div class="content" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'grid'}">
+    <div *ngFor="let array of counter(9); index as i"
+     [ngClass]="{'winner': i === firstPosition || i === secondPosition || i === thirdPosition}" 
+     class="item" 
+     (click)="handleClick(i)"><h1>{{elements[i]}}</h1></div>
+</div>

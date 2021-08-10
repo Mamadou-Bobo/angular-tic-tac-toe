@@ -1,45 +1,27 @@
 .container{
+    width: 100%;
+    
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    width: 500px;
-    height: 300px;
 }
 
-.content{
-    width: 180px;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    background-color: aqua;
-}
-
-.result,
-.bottom{
-    width: 100%;
-    height: 150px;
-
+.result{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    margin-bottom: 40px;
 }
 
 .playerOne,
 .playerTwo{
-    width: 100%;
+    width: 80%;
     height: 15px;
 
-    margin: 60px;
+    margin: 10px;
 
     display: flex;
     flex-direction: row;
@@ -52,19 +34,26 @@
 
 .playerOne h1,
 .playerTwo h1{
-    font-size: 20px;
+    font-size: 14px;
     color: #fff;
     margin: 0;
 }
 
 .currentPlayer{
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 40px 0;
+}
+
+.currentPlayer span{
+   font-size: 18px;
 }
 
 .winner{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 
 .winner h1:first-child{
@@ -76,15 +65,24 @@
     font-size: 25px;
 }
 
+.bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 40px;
+}
+
 .bottom button,
 .bottom .mode select{
     width: 100px;
     height: 35px;
 
+    padding: 10px;
+
     outline: none;
     cursor: pointer;
-
-    margin: 60px;
 
     border: none;
     border-radius: 5px;
@@ -97,4 +95,27 @@
 
 .bottom button:hover{
     background-color: #192027;
+}
+
+
+@media only screen and (min-width: 550px) {
+    .container{
+        width: 60%;
+    }
+
+    .playerOne{
+        margin: 0 10px 0 0;
+    }
+    .playerTwo{
+        margin: 0 0 0 10px;
+    }
+    .bottom{
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .container{
+        width: 30%;
+    }
 }
