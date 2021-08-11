@@ -1,6 +1,16 @@
 <div class="content" [ngStyle]="{'display': isWinner || notWin ? 'none' : 'grid'}">
     <div *ngFor="let array of counter(9); index as i"
      [ngClass]="{'winner': i === firstPosition || i === secondPosition || i === thirdPosition}" 
+     [ngClass]="{'disableValueOne': valueOne === i ? true : false}"
+     [ngClass]="{'disableValueTwo': valueTwo === i ? true : false}"
+     [ngClass]="{'disableValueThree': valueThree === i ? true : false}"
+     [ngClass]="{'disableValueFour': valueFour === i ? true : false}"
+     [ngClass]="{'disableValueFive': valueFive === i ? true : false}"
+     [ngClass]="{'disableValueSix': valueSix === i ? true : false}"
+     [ngClass]="{'disableValueSeven': valueSeven === i ? true : false}"
+     [ngClass]="{'disableValueEigth': valueEigth === i ? true : false}"
+     [ngClass]="{'disableValueNine': valueNine === i ? true : false}"
+
      class="item" 
      (click)="handleClick(i)"><h1>{{elements[i]}}</h1></div>
 </div>

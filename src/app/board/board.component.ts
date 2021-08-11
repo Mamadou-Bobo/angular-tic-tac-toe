@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GameService } from '../game.service';
@@ -8,7 +8,7 @@ import { GameService } from '../game.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
   @ViewChild("contactForm", {static: false}) contactForm:NgForm | undefined;
 
@@ -55,6 +55,17 @@ export class BoardComponent implements OnInit {
 
   constructor(private formBulder: FormBuilder,
               private gameService: GameService) { }
+
+  ngOnDestroy(): void {
+    this.symbolSubscription?.unsubscribe();
+    this.winnerSubscription?.unsubscribe();
+    this.gameOverSubscription?.unsubscribe();
+    this.lastPlayerSubscription?.unsubscribe();
+    this.winSubscription?.unsubscribe();
+    this.playerOneSubscription?.unsubscribe();
+    this.playerTwoSubscription?.unsubscribe();
+    this.isClickableSubscription?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.symbolSubscription = this.gameService.symbolSubject.subscribe(

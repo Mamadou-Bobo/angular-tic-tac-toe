@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { GameService } from '../game.service';
 
@@ -7,12 +7,13 @@ import { GameService } from '../game.service';
   templateUrl: './tic-tac-toe-grid.component.html',
   styleUrls: ['./tic-tac-toe-grid.component.css']
 })
-export class TicTacToeGridComponent implements OnInit {
+export class TicTacToeGridComponent implements OnInit, OnDestroy {
 
   @Input() modeValue?: number = 1;
   
   elements: string[] = [];
   array: number[] = [];
+  blockedElements: number[] = [];
 
   firstPosition!: number;
   secondPosition!: number;
@@ -29,6 +30,16 @@ export class TicTacToeGridComponent implements OnInit {
   currentPlayer: string = 'X';
 
   generatedNumber: number = 0;
+
+  valueOne!: number;
+  valueTwo!: number;
+  valueThree!: number;
+  valueFour!: number;
+  valueFive!: number;
+  valueSix!: number;
+  valueSeven!: number;
+  valueEigth!: number;
+  valueNine!: number;
 
   @Input() isClicked: boolean = false;
 
@@ -47,6 +58,17 @@ export class TicTacToeGridComponent implements OnInit {
   thirdPositionSubscription?: Subscription;
 
   constructor(private gameService: GameService) { }
+  
+  ngOnDestroy(): void {
+    this.symbolSubscription?.unsubscribe();
+    this.winnerSubscription?.unsubscribe();
+    this.gameOverSubscription?.unsubscribe();
+    this.isClickableSubscription?.unsubscribe();
+    this.isClickedSubscription?.unsubscribe();
+    this.firstPositionSubscription?.unsubscribe();
+    this.secondPositionSubscription?.unsubscribe();
+    this.thirdPositionSubscription?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.winnerSubscription = this.gameService.winnerSubject.subscribe(
@@ -63,7 +85,17 @@ export class TicTacToeGridComponent implements OnInit {
 
     this.isClickableSubscription = this.gameService.isClickableSubject.subscribe(
       (data) => {
+        this.blockedElements.splice(0,this.blockedElements.length);
         this.isClickable = data;
+        this.valueOne = -1;
+        this.valueTwo = -1;
+        this.valueThree = -1;
+        this.valueFour = -1;
+        this.valueFive = -1;
+        this.valueSix = -1;
+        this.valueSeven = -1;
+        this.valueEigth = -1;
+        this.valueNine = -1;
       }
     );
 
@@ -114,6 +146,16 @@ export class TicTacToeGridComponent implements OnInit {
         this.currentPlayer = 'X';
       }
     }
+    this.blockedElements.push(index);
+    this.valueOne = this.blockedElements[0];
+    this.valueTwo = this.blockedElements[1];
+    this.valueThree = this.blockedElements[2];
+    this.valueFour = this.blockedElements[3];
+    this.valueFive = this.blockedElements[4];
+    this.valueSix = this.blockedElements[5];
+    this.valueSeven = this.blockedElements[6];
+    this.valueEigth = this.blockedElements[7];
+    this.valueNine = this.blockedElements[8];
   }
 
   handleClick(index: number) {

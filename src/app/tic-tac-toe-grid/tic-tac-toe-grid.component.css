@@ -38,6 +38,18 @@
 div .item.winner{
     background-color: #c0392b;
 }
+
+.disableValueOne,
+.disableValueTwo,
+.disableValueThree,
+.disableValueFour,
+.disableValueFive,
+.disableValueSix,
+.disableValueSeven,
+.disableValueEigth,
+.disableValueNine{
+    pointer-events: none;
+}
  
 @media only screen and (min-width: 730px) {
     .content > div {
